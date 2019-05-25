@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "179029107249",
+    "firebase_url": "https://fir-test-52a32.firebaseio.com",
+    "project_id": "fir-test-52a32",
+    "storage_bucket": "fir-test-52a32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:179029107249:android:3182d3be989044e2",
+        "android_client_info": {
+          "package_name": "com.porducer.firebase_test2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "179029107249-l3e2ps7i651hadj8l9t9dtqqpjeibg0n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBh2XLPnBwUMasP9RbBrZv3exUAM37vGJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "179029107249-l3e2ps7i651hadj8l9t9dtqqpjeibg0n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
