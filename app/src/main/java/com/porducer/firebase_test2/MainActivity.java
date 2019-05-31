@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     Context Context;
     DocumentReference user_ref;
-    TextView textfor = (TextView) findViewById(R.id.textView);
+    TextView textfor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         final Button button = (Button) findViewById(R.id.button);
         final Button button2 = (Button) findViewById(R.id.button2);
+        textfor = findViewById(R.id.textView);
 
 
         db = DB.DB_Connect();
@@ -52,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener Read_user_Listener = new View.OnClickListener(){
         public void onClick(View v){
             Map<String, Object> user_data = new HashMap<>();
-            DB.Data_read(user_ref, Context, textfor);
+            String User_string = DB.Data_read(user_ref, Context);
+            //textfor.setText(User_string);
+            Toast.makeText(Context,"User_string",Toast.LENGTH_LONG).show();
         }
     };
 
