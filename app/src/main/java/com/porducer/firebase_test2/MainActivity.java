@@ -8,9 +8,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,9 +21,10 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
-    Context Context;
+    Context Context = MainActivity.this;
     DocumentReference user_ref;
     TextView textfor;
+    String Login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +48,11 @@ public class MainActivity extends AppCompatActivity {
             Map<String, Object> user = new HashMap<>();
             user.put("Login", "noareyenonar");
             user.put("Password", "kittiphon");
-            user.put("Date_of_register","ServerValue.TIMESTAMP");
-            //Add data for use registeration into hashmap
+            user.put("Date_of_register",new Timestamp(new Date()));
+            Login = (String) user.get("Login");
+            //
             user_ref = DB.Data_add_user_regis(user);
+            Toast.makeText(Context,"User add DONE",Toast.LENGTH_LONG).show();
         }
     };
 
@@ -56,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             Map<String, Object> user_data = new HashMap<>();
             String User_string = DB.Data_read(user_ref, Context);
             //textfor.setText(User_string);
-            Toast.makeText(Context,"User_string",Toast.LENGTH_LONG).show();
+            Toast.makeText(Context,User_string,Toast.LENGTH_LONG).show();
         }
     };
 
