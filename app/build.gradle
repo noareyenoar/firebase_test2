@@ -28,6 +28,12 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-core:16.0.9'
     implementation 'com.google.firebase:firebase-firestore:19.0.0'
+    implementation 'com.google.firebase:firebase-auth:17.0.0'
+    implementation 'com.facebook.android:facebook-login:[5,6)'
+
+
+
+
 
 }
 apply plugin: 'com.google.gms.google-services'
