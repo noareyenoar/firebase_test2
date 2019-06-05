@@ -8,12 +8,21 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textfor;
     String Login;
     private static final String EMAIL = "email";
+    private CallbackManager mCallbackManager;
 
 
     @Override
@@ -42,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
         final Button button = (Button) findViewById(R.id.button);
         final Button button2 = (Button) findViewById(R.id.button2);
-        LoginButton loginButton = findViewById(R.id.buttonFacebookLogin);
+        LoginButton buttonFacebookLogin = findViewById(R.id.buttonFacebookLogin);
+        buttonFacebookLogin.setPermissions("email", "public_profile");
         textfor = findViewById(R.id.textView);
 
 
@@ -50,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(Add_user_Listener);
         button2.setOnClickListener(Read_user_Listener);
 
-
+        mCallbackManager = CallbackManager.Factory.create();
+        buttonFacebookLogin.setOnClickListener(FB_Login_Listener);
     }
 
     private View.OnClickListener Add_user_Listener = new View.OnClickListener(){
@@ -74,6 +86,14 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(Context,User_string,Toast.LENGTH_LONG).show();
         }
     };
+
+    private View.OnClickListener FB_Login_Listener = new View.OnClickListener(){
+        public void onClick(View v){
+
+
+
+
+        }
 
 
 
