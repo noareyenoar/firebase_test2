@@ -30,6 +30,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private CallbackManager mCallbackManager;
     private TextView mStatusTextView;
     private TextView mDetailTextView;
+    private ImageView ProfilePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         //Declare View Object
         final Button button = (Button) findViewById(R.id.button);
         final Button button2 = (Button) findViewById(R.id.button2);
-        Button Facebook_Signout = (Button) findViewById(R.id.Facebook_Signout);
         mStatusTextView = findViewById(R.id.Status);
         mDetailTextView = findViewById(R.id.Detail);
 
@@ -97,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
         //Button//
         button.setOnClickListener(Add_user_Listener);
         button2.setOnClickListener(Read_user_Listener);
-        Facebook_Signout.setOnClickListener(Facebook_Signout_Listener);
-
     }
 
     private View.OnClickListener Add_user_Listener = new View.OnClickListener() {
@@ -120,15 +120,6 @@ public class MainActivity extends AppCompatActivity {
             String User_string = DB.Data_read(user_ref, Context);
             //textfor.setText(User_string);
             Toast.makeText(Context, User_string, Toast.LENGTH_LONG).show();
-        }
-    };
-
-    private View.OnClickListener Facebook_Signout_Listener = new View.OnClickListener() {
-        public void onClick(View v) {
-            int i = v.getId();
-            if (i == R.id.Facebook_Signout) {
-                signOut();
-            }
         }
     };
 
@@ -187,15 +178,18 @@ public class MainActivity extends AppCompatActivity {
         if (user != null) {
             mStatusTextView.setText(user.getDisplayName());
             mDetailTextView.setText(user.getUid());
+            ProfilePic = findViewById(R.id.ProfilePic);
+            String ProfileURL = user.getPhotoUrl() + "/picture?height=500";
+            Picasso.get().load(ProfileURL).resize(500, 500).centerCrop().into(ProfilePic);
 
-            //findViewById(R.id.buttonFacebookLogin).setVisibility(View.GONE);
-            findViewById(R.id.Facebook_Signout).setVisibility(View.VISIBLE);
         } else {
             mStatusTextView.setText("Signout Already");
             mDetailTextView.setText(null);
 
             findViewById(R.id.buttonFacebookLogin).setVisibility(View.VISIBLE);
-            //findViewById(R.id.Facebook_Signout).setVisibility(View.GONE);
+
+
+
         }
     }
 
