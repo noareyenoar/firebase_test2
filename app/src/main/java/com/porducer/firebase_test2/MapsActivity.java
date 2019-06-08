@@ -9,6 +9,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -26,15 +29,17 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.porducer.firebase_test2.R;
 
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
 
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
+import static java.lang.Double.parseDouble;
 
+//Start of Demo Map Code//
 @RuntimePermissions
 public class MapsActivity extends AppCompatActivity {
 
@@ -53,10 +58,18 @@ public class MapsActivity extends AppCompatActivity {
      */
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 
+    private TextView Lat;
+    private TextView Lon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        Lat = findViewById(R.id.lat);
+        Lon = findViewById(R.id.lon);
+        Button Addmarker = (Button) findViewById(R.id.addmarker);
+        Addmarker.setOnClickListener(Addmarker_Listener);
 
         if (TextUtils.isEmpty(getResources().getString(R.string.google_maps_key))) {
             throw new IllegalStateException("You forgot to supply a Google Maps API key");
@@ -213,11 +226,11 @@ public class MapsActivity extends AppCompatActivity {
 
         // Report to the UI that the location was updated
 
-        mCurrentLocation = location;
-        String msg = "Updated Location: " +
-                Double.toString(location.getLatitude()) + "," +
-                Double.toString(location.getLongitude());
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+//        mCurrentLocation = location;
+//        String msg = "Updated Location: " +
+//                Double.toString(location.getLatitude()) + "," +
+//                Double.toString(location.getLongitude());
+//        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -248,5 +261,19 @@ public class MapsActivity extends AppCompatActivity {
             return mDialog;
         }
     }
+    //End of Demo Map Code//
+
+    private View.OnClickListener Addmarker_Listener = new View.OnClickListener() {
+        public void onClick(View v) {
+            if (Lat.getText().toString().matches("")&&Lon.getText().toString().matches("")) {
+                double Latf = parseDouble(Lat.getText().toString());
+                double Lonf = parseDouble(Lon.getText().toString());
+                map.addMarker(new MarkerOptions()
+                        .position(new LatLng(Latf, Lonf))
+                        .title("Marker"));
+            }
+            //else Toast.makeText(getApplicationContext(), "Lat Or Lon is empty", Toast.LENGTH_SHORT).show();
+        }
+    };
 
 }
