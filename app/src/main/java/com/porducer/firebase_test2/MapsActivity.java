@@ -265,14 +265,14 @@ public class MapsActivity extends AppCompatActivity {
 
     private View.OnClickListener Addmarker_Listener = new View.OnClickListener() {
         public void onClick(View v) {
-            if (Lat.getText().toString().matches("")&&Lon.getText().toString().matches("")) {
+            if (!Lat.getText().toString().matches("")&&!Lon.getText().toString().matches("")) {
                 double Latf = parseDouble(Lat.getText().toString());
                 double Lonf = parseDouble(Lon.getText().toString());
                 map.addMarker(new MarkerOptions()
                         .position(new LatLng(Latf, Lonf))
                         .title("Marker"));
             }
-            //else Toast.makeText(getApplicationContext(), "Lat Or Lon is empty", Toast.LENGTH_SHORT).show();
+            else {Toast.makeText(getApplicationContext(), "Lat or Lon is empty", Toast.LENGTH_SHORT).show();}
         }
     };
 
