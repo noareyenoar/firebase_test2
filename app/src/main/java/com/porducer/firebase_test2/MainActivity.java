@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         //Declare View Object
         final Button button = (Button) findViewById(R.id.button);
         final Button button2 = (Button) findViewById(R.id.button2);
+        final Button ToMap = (Button) findViewById(R.id.ToMap);
         mStatusTextView = findViewById(R.id.Status);
         mDetailTextView = findViewById(R.id.Detail);
 
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         //Button//
         button.setOnClickListener(Add_user_Listener);
         button2.setOnClickListener(Read_user_Listener);
+        ToMap.setOnClickListener(To_Map_Activity);
     }
 
     private View.OnClickListener Add_user_Listener = new View.OnClickListener() {
@@ -120,6 +122,13 @@ public class MainActivity extends AppCompatActivity {
             String User_string = DB.Data_read(user_ref, Context);
             //textfor.setText(User_string);
             Toast.makeText(Context, User_string, Toast.LENGTH_LONG).show();
+        }
+    };
+
+    private View.OnClickListener To_Map_Activity = new View.OnClickListener() {
+        public void onClick(View v) {
+            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+            startActivity(intent);
         }
     };
 

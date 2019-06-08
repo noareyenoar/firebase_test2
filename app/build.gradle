@@ -34,6 +34,13 @@ dependencies {
 
     implementation 'com.squareup.picasso:picasso:2.71828'  //Picasso image loader
 
+    implementation 'com.github.hotchemi:permissionsdispatcher:3.1.0'    //Runtime Permission Dispatcher
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.1.0' //Runtime Permission Dispatcher
+
+    implementation 'com.google.android.gms:play-services-plus:16.0.0' //Google play
+    implementation 'com.google.android.gms:play-services-location:16.0.0' //Google Map
+
+
 
 }
 apply plugin: 'com.google.gms.google-services'
